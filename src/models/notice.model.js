@@ -21,6 +21,5 @@ const noticeSchema = new mongoose.Schema({
         default:Date.now()
     }
 })
-
 const Notice = mongoose.model("notices",noticeSchema)
 module.exports = Notice

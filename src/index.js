@@ -1,11 +1,14 @@
 const express = require('express')
-
+const authRoutes = require('../src/routes/auth.routes')
+const complaintRoutes = require('../src/routes/complaint.routes')
+const eventRoutes = require("../src/routes/event.routes");
+const noticeRoutes = require("../src/routes/notice.routes");
 const app = express()
 app.use(express.json())
 const cors = require('cors')
 app.use(cors())
-
-const authRoutes = require('../src/routes/auth.routes')
-app.use('/auth',authRoutes)
-
+app.use('/auth',authRoutes);
+app.use('/complaint',complaintRoutes);
+app.use('/event',eventRoutes);
+app.use("/notice",noticeRoutes);
 module.exports = app
