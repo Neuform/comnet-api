@@ -20,6 +20,7 @@ const requireSignIn = async (req,res,next)=>{
 const isAdmin = async (req,res,next)=>{
     try {
         console.log("in middleware")
+        console.log(req.user)
         const {id} = req.user;
         console.log(id);
         let user = await User.findById(id);

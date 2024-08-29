@@ -1,9 +1,35 @@
 const complaint = require("../models/complaints.model");
-const complaintService = async (req)=>{
-    console.log("complaint service")
-    const {title,description,image,userId} = req;
-    const result =  new complaint({title,description,image,createdBy:userId})
+const addComplaintService = async (body,userId)=>{
+    console.log("Complaint service")
+    const {id} = userId
+    const result =  new complaint({...body,createdBy:id})
     const savedResult = await result.save();
     return savedResult;
 }
-module.exports = complaintService;
+
+const getComplaintByIdService = async(id)=>{
+    console.log("getComplaintByIdService");
+    const result = await complaint.findById(id);
+    return result;
+}
+
+const getAllComplaintService = async()=>{
+    console.log("getAllComplaintService");
+    const result = await complaint.find({});
+    return result;
+}
+
+const updateComplaintService = async(id,body)=>{
+    console.log("updateComplaintService");
+    const result = await complaint.findByIdAndUpdate(id,body,{new:true})
+    return result;
+}
+
+const deleteComplaintService = async(id)=>{
+    console.log("deleteComplaintService");
+    const result = await complaint.findByIdAndDelete(id);
+    console.log(result);
+    return result;
+}
+
+module.exports = {addComplaintService,getComplaintByIdService,getAllComplaintService,updateComplaintService,deleteComplaintService};
