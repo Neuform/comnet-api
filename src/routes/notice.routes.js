@@ -4,18 +4,18 @@ const express = require('express')
 const router = express.Router()
 
 // add new Notice
-router.post("/add",authMiddleware.requireSignIn,authMiddleware.isAdmin,noticeController.addNoticeController);
+router.post("/add",authMiddleware.authenticate,authMiddleware.isAdmin,noticeController.addNoticeController);
 
 // get all Notices
-router.get("/all",authMiddleware.requireSignIn,authMiddleware.isAdmin,noticeController.getAllNoticeController);
+router.get("/all",authMiddleware.authenticate,authMiddleware.isAdmin,noticeController.getAllNoticeController);
 
 // get a Notice by Id
-router.get("/:id",authMiddleware.requireSignIn,authMiddleware.isAdmin,noticeController.getNoticeByIdController);
+router.get("/:id",authMiddleware.authenticate,authMiddleware.isAdmin,noticeController.getNoticeByIdController);
 
 // update a Notice
-router.put("/:id/update",authMiddleware.requireSignIn,authMiddleware.isAdmin,noticeController.updateNoticeController);
+router.put("/:id/update",authMiddleware.authenticate,authMiddleware.isAdmin,noticeController.updateNoticeController);
 
 // delete A Notice 
-router.delete("/:id/delete",authMiddleware.requireSignIn,authMiddleware.isAdmin,noticeController.deleteNoticeController)
+router.delete("/:id/delete",authMiddleware.authenticate,authMiddleware.isAdmin,noticeController.deleteNoticeController)
 
 module.exports = router;

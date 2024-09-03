@@ -22,7 +22,12 @@ const communitySchema = new mongoose.Schema({
     members:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:"users"
-    }]
+    }],
+    image:{
+        type:String,
+        default:'https://ik.imagekit.io/1tts9ykov/COMNET/COMNET.png?updatedAt=1725344228082'
+
+    }
 })
 
 const Community = mongoose.model('communities',communitySchema)
