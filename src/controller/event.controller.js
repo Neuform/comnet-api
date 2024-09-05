@@ -41,7 +41,7 @@ const getEventByIdController = async(req,res)=>{
     } catch (error) {
         res.status(500).send({
             success:false,
-            error
+            error:error.message
         }) 
     }
 }
@@ -58,7 +58,7 @@ const getAllEventController = async(req,res)=>{
     } catch (error) {
         res.status(500).send({
             success:false,
-            error
+            error:error.message
         })
     }
 }
@@ -84,7 +84,7 @@ const updateEventController = async(req,res)=>{
     } catch (error) {
         res.status(500).send({
             success:false,
-            error
+            error:error.message
         })
     }
 }
@@ -110,7 +110,7 @@ const deleteEventController = async(req,res)=>{
     } catch (error) {
         res.status(500).send({
             success:false,
-            error
+            error:error.message
         })
     }
 }

@@ -26,7 +26,6 @@ const communitySchema = new mongoose.Schema({
     image:{
         type:String,
         default:'https://ik.imagekit.io/1tts9ykov/COMNET/COMNET.png?updatedAt=1725344228082'
-
     }
 })
 

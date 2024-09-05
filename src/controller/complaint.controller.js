@@ -13,7 +13,7 @@ const addComplaintController = async (req,res)=>{
     } catch (error) {
         res.status(500).send({
             success:false,
-            error
+            error:error.message
         })
     }  
 }
@@ -29,7 +29,7 @@ const getAllComplaintController = async (req,res)=>{
     } catch (error) {
         res.status(500).send({
             success:false,
-            error
+            error:error.message
         })
     }
 }
@@ -53,7 +53,7 @@ const getComplaintByIdController = async (req,res)=>{
     } catch (error) {
         res.status(500).send({
             success:false,
-            error
+            error:error.message
         }) 
     }
 }
@@ -76,7 +76,7 @@ const updateComplaintController = async (req,res)=>{
     } catch (error) {
         res.status(500).send({
             success:false,
-            error
+            error:error.message
         })
     }
 }
@@ -100,7 +100,7 @@ const deleteComplaintController = async (req,res)=>{
     } catch (error) {
         res.status(500).send({
             success:false,
-            error
+            error:error.message
         })
     }
 }
