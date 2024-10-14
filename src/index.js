@@ -5,6 +5,7 @@ const eventRoutes = require("../src/routes/event.routes");
 const noticeRoutes = require("../src/routes/notice.routes");
 const postRoutes = require("./routes/post.routes")
 const communityRoutes = require("./routes/community.routes");
+const userRoutes = require('./routes/user.routes')
 const app = express()
 app.use(express.json())
 const cors = require('cors')
@@ -15,4 +16,5 @@ app.use('/event',eventRoutes);
 app.use("/notice",noticeRoutes);
 app.use("/post",postRoutes);
 app.use("/community",communityRoutes);
+app.use('/user',userRoutes)
 module.exports = app

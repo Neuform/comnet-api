@@ -1,6 +1,8 @@
 const userService = require('../services/user.service.js')
 const jwtProvider = require('../config/jwtProvider.js')
 const bcrypt = require('bcryptjs')
+const User = require('../models/user.model.js')
+
 
 
 
@@ -34,12 +36,23 @@ const login = async(req,res)=>{
         }
 
         const jwt = jwtProvider.generateToken(user._id)
-        return res.status(200).send({jwt,message:"Login Successful"})
+        return res.status(200).send({jwt,id:user._id,message:"Login Successful"})
 
     } catch (error) {
         return res.status(500).send({error:error.message})
     }
 }
 
+const findUserByIdController = async(req,res)=>{
+    try {
+        const id = req.params.id;
+        console.log(id)
+        const user = await User.findById(id)
+        return res.status(200).send({user:user})
+    } catch (error) {
+        return res.status(500).send({error:error.message})
+    }
+}
 
-module.exports={register,login}
+
+module.exports={register,login,findUserByIdController}

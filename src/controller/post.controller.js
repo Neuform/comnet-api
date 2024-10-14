@@ -116,8 +116,7 @@ const likePostController = async (req, res) => {
     try {
         console.log("likePostController");
         const { id } = req.params;
-        const hasUserLiked = await postService.hasUserLiked(req.user._id,id);
-        if (!hasUserLiked) {
+        
             const result = await postService.likePostService(id, req.user._id);
             if (!result) {
                 return res.status(404).send(
@@ -133,13 +132,6 @@ const likePostController = async (req, res) => {
                 message: "post liked successfully",
                 result
             })
-        }
-        return res.status(401).send(
-            {
-                success:true,
-                message:"User has already Liked the post"
-            }
-        )
 
     } catch (error) {
         res.status(500).send({
@@ -148,6 +140,40 @@ const likePostController = async (req, res) => {
         })
     }
 }
+
+const unlikePostController = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const hasUserLiked = await postService.hasUserLiked(req.user._id, id);
+        
+        if (hasUserLiked) {
+            const result = await postService.unlikePostService(id, req.user._id);
+            if (!result) {
+                return res.status(404).send({
+                    success: false,
+                    message: "Invalid post Id",
+                    result
+                });
+            }
+            return res.status(200).send({
+                success: true,
+                message: "Post unliked successfully",
+                result
+            });
+        }
+        return res.status(401).send({
+            success: true,
+            message: "User has not liked the post yet"
+        });
+
+    } catch (error) {
+        res.status(500).send({
+            success: false,
+            error: error.message
+        });
+    }
+};
+
 const addCommentPostController = async (req, res) => {
     try {
         console.log("addCommentPostController")
@@ -175,6 +201,6 @@ const addCommentPostController = async (req, res) => {
     }
 }
 
-module.exports = { addPostController, deletePostController, getAllPostController, getPostByIdController, likePostController, addCommentPostController };
+module.exports = { addPostController, deletePostController, getAllPostController, getPostByIdController, likePostController, addCommentPostController, unlikePostController };
 
 

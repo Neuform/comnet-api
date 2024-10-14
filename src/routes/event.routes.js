@@ -7,7 +7,7 @@ const router = express.Router()
 router.post("/add",authMiddleware.authenticate,authMiddleware.isAdmin,eventController.addEventController);
 
 // get all events
-router.get("/all",authMiddleware.authenticate,authMiddleware.isAdmin,eventController.getAllEventController);
+router.get("/all",authMiddleware.authenticate,eventController.getAllEventController);
 
 // get event by its id
 router.get("/:id",authMiddleware.authenticate,authMiddleware.isAdmin,eventController.getEventByIdController);

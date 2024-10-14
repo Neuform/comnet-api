@@ -7,6 +7,7 @@
  * ADD COMMENT
  */
 const post = require("../models/post.model");
+const User = require("../models/user.model");
 
 
 
@@ -14,7 +15,10 @@ const createPostService = async (body,userId)=>{
     console.log('createPostService');
     console.log("userId :",userId);
     console.log("body :",body);
-    const result = new post({...body});
+    const user =await User.findById(userId)
+    console.log(user)
+    const author = `${user.firstName} ${user.lastName}`
+    const result = new post({...body,author:author});
     const savedResult = await result.save();
     return savedResult;
 }
@@ -48,5 +52,15 @@ const addCommentService = async (postId,userId,text)=>{
     const result = await post.findByIdAndUpdate(postId,{$push:{comments:{...text,user:userId}}},{new:true});
     return result;
 }
+const unlikePostService = async (postId, userId) => {
+    console.log('check',postId)
+    const result = await post.findByIdAndUpdate(
+        postId,
+        { $pull: { likes: { user: userId } } }, // This pulls the like for the user
+        { new: true } // Return the updated document
+    );
+    console.log(result)
+    return result;
+};
 
-module.exports ={createPostService,deletePostService,getAllPostService,likePostService,getPostByIdService,addCommentService,hasUserLiked}
+module.exports ={createPostService,deletePostService,getAllPostService,likePostService,getPostByIdService,addCommentService,hasUserLiked,unlikePostService}

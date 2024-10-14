@@ -7,7 +7,7 @@ const router = express.Router()
 router.post("/add",authMiddleware.authenticate,authMiddleware.isAdmin,noticeController.addNoticeController);
 
 // get all Notices
-router.get("/all",authMiddleware.authenticate,authMiddleware.isAdmin,noticeController.getAllNoticeController);
+router.get("/all",authMiddleware.authenticate,noticeController.getAllNoticeController);
 
 // get a Notice by Id
 router.get("/:id",authMiddleware.authenticate,authMiddleware.isAdmin,noticeController.getNoticeByIdController);

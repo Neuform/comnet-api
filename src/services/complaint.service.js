@@ -1,9 +1,12 @@
 const complaint = require("../models/complaints.model");
+const User = require("../models/user.model");
 
 const addComplaintService = async (body,userId)=>{
     console.log("Complaint service")
     const {id} = userId
-    const result =  new complaint({...body,createdBy:id})
+    const user = await User.findById(id)
+    console.log(user.firstName+" "+user.lastName)
+    const result =  new complaint({...body,createdBy:id,author:`${user.firstName} ${user.lastName}`})
     const savedResult = await result.save();
     return savedResult;
 }
